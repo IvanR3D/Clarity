@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Map Generator for Clarity Platform Game Engine</title>
+  <title>Map Builder for Clarity Platform Game Engine</title>
   <style>
     * {
       box-sizing: border-box;
@@ -20,6 +20,13 @@
       background-color: #333;
       color: whitesmoke;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    header a {
+      color: #e6e6e6;
+    }
+    header a:hover {
+      opacity: .5;
     }
 
     h1 {
@@ -71,10 +78,10 @@
   <script src="sweetalert2.all.min.js"></script>
 </head>
 
-<body>
+<body onload="generateTable()">
   <header>
     <h1>Map Builder for Clarity Platform Game Engine</h1>
-    <p>Use this tool to generate maps for Clarity game.</p>
+    <p>Use this tool to generate maps for <a href="index.html" target="_blank">Clarity game</a>.</p>
   </header>
 
   <form>
@@ -100,6 +107,7 @@
     </datalist>
     <button type="button" onclick="generateTable()">Generate Table</button>
     <button type="button" id="copyButton">Copy Map</button>
+    <button type="button" onclick="editMap()">Edit a Map</button>
   </form>
 
   <div class="container">
@@ -110,7 +118,8 @@
     var mouseDown = false;
     var color = "#ffffff"; // Set initial color to white
     var tableArray = null;
-
+    let cellColor;
+    
     function generateTable() {
       var rows = document.getElementById("rows").value;
       var columns = document.getElementById("columns").value;
@@ -223,7 +232,7 @@
       document.body.removeChild(tempTextarea);
       // Alert the user that the array has been copied
       Swal.fire({
-        position: 'top-center',
+        position: 'center',
         icon: 'success',
         title: 'Map copied to the clipboard',
         showConfirmButton: false,
@@ -232,6 +241,59 @@
 
     });
 
+    function editMap() {
+      Swal.fire({
+                title: 'Paste your map array here!',
+                html: '<textarea id="mapArray" style="width:80%;height:100px;"></textarea>',
+                confirmButtonText: 'Load',
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    arrayMap = document.getElementById("mapArray").value;
+                    buildMap(JSON.parse(arrayMap));
+                    
+                }
+            })
+    }
+
+    function buildMap(mapdata) {
+      let counter = 0;
+      mapdata.forEach(el => {
+        el.forEach(e => {
+          getColor(e);
+          document.getElementsByTagName("td")[counter].style.backgroundColor = cellColor;
+          counter++;
+        });
+      });
+
+      function getColor(n) {
+        
+        if (n === 0) {
+          cellColor = "#333333";
+        } else if (n === 1) {
+          cellColor = "rgb(136, 136, 136)";
+        } else if (n === 2) {
+          cellColor = "rgb(85, 85, 85)";
+        } else if (n === 3) {
+          cellColor = "rgb(121, 220, 242)";
+        } else if (n === 4) {
+          cellColor = "rgb(119, 119, 119)";
+        } else if (n === 5) {
+          cellColor = "rgb(227, 115, 250)";
+        } else if (n === 6) {
+          cellColor = "rgb(102, 102, 102)";
+        } else if (n === 7) {
+          cellColor = "rgb(115, 198, 250)";
+        } else if (n === 8) {
+          cellColor = "rgb(250, 223, 115)";
+        } else if (n === 9) {
+          cellColor = "rgb(201, 50, 50)";
+        } else if (n === 10) {
+          cellColor = "rgb(85, 85, 85)";
+        } else if (n === 11) {
+          cellColor = "rgb(0, 255, 255)";
+        }
+      }
+    }
   </script>
 </body>
 
