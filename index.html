@@ -18,8 +18,21 @@
             <button onclick="loadMap()">Load map</button>
             <button onclick="window.open('./maps.html', '_blank')">Select a map</button>
         </div>
+        <a class="github-ribbon" href="https://github.com/IvanR3D/Clarity" target="_blank">Fork this on Github</a>
     </header>
     <canvas id="canvas"></canvas>
+
+    <div id="btns--container">
+        <div class="up">
+          <button onmousedown="btnPressed('up')" onmouseup="btnReleased('up')">↑</button>
+        </div>
+        <div class="left-right">
+          <button onmousedown="btnPressed('left')" onmouseup="btnReleased('left')">←</button>
+          <button>↓</button>
+          <button onmousedown="btnPressed('right')" onmouseup="btnReleased('right')">→</button>
+        </div>
+    </div>
+    
 
     <p>Use the left, right and up arrow keys to move.</p>
 
@@ -227,6 +240,25 @@
 
             window.requestAnimFrame(Loop);
         };
+
+        function btnPressed(btn) {
+            if (btn === "up") {
+                game.key.up = true;
+            } else if (btn === "left") {
+                game.key.left = true;
+            } else if (btn === "right") {
+                game.key.right = true;
+            } 
+        }
+        function btnReleased(btn) {
+            if (btn === "up") {
+                game.key.up = false;
+            } else if (btn === "left") {
+                game.key.left = false;
+            } else if (btn === "right") {
+                game.key.right = false;
+            } 
+        }
 
         /* Start */
         

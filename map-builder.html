@@ -74,6 +74,27 @@
       cursor: pointer;
       background-color: #333333;
     }
+
+    .github-ribbon {
+      font-size: 1.2em;
+      background: #333333;
+      height: 2em;
+      width: 20em;
+      text-align: center;
+      text-decoration: none;
+      color: #f5f5f5;
+      line-height: 2em;
+      font-family: Helvetica, Arial, sans-serif;
+      position: fixed;
+      top: 0;
+      right: 0;
+      transform: translate(50%,-50%) rotate(45deg) translateY(7em);
+      box-shadow: 0 0 2em 0.2em #333333;
+    }
+
+    .github-ribbon:hover {
+      background: #333333bc;
+    }
   </style>
   <script src="sweetalert2.all.min.js"></script>
 </head>
@@ -82,6 +103,7 @@
   <header>
     <h1>Map Builder for Clarity Platform Game Engine</h1>
     <p>Use this tool to generate maps for <a href="index.html" target="_blank">Clarity game</a>.</p>
+    <a class="github-ribbon" href="https://github.com/IvanR3D/Clarity" target="_blank">Fork this on Github</a>
   </header>
 
   <form>
